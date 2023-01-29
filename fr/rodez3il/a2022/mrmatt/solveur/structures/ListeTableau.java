@@ -4,15 +4,16 @@ import java.util.Arrays;
 
 public class ListeTableau<T> implements Liste<T> {
 
-  private ArrayList<T> tab;
-  private int size = 0;
+  private T[] tableau;
+  private int size;
 
   public ListeTableau(int size) throws Exception {
     if (size < 0) {
       throw new Exception("Vous ne pouvez pas indiquer une taille inférieure à 0");
     }
     this.size = size;
-    this.tab = new ArrayList<T>()[size];
+    this.tableau = (T[]) new Object[size];
+    // this.tab = new T[size];
   }
 
   /**
@@ -20,21 +21,16 @@ public class ListeTableau<T> implements Liste<T> {
    * 
    * @param element l'élément à ajouter
    */
+  
   public void ajouter(T element) {
     /**
      * Si on a atteint la taille maximale,
      * refaire un tableau en doublant la taille initale
      */
-    if (this.tab.size >= this.size) {
-      ArrayList<T> tmp = this.tab;
-      this.tab = new ListeTableau(tmp.size * 2);
-      for (int i = 0; i < tmp.size(); i++) {
-        this.tab[i] = tmp[i];
-      }
-      this.tab.add(element);
-    } else {
-      this.tab.add(element);
+    if (this.tableau.length == this.size) {
+      tableau = Arrays.copyOf(tableau, tableau.length * 2);
     }
+    this.tableau[size++] = element;
   }
 
   /**
@@ -42,8 +38,9 @@ public class ListeTableau<T> implements Liste<T> {
    * 
    * @return true ssi la liste est vide.
    */
+  @Override
   public boolean estVide() {
-    return this.tab.size == 0 ? true : false;
+    return this.tableau.length == 0;
   }
 
   /**
@@ -51,6 +48,7 @@ public class ListeTableau<T> implements Liste<T> {
    * 
    * @return La taille de la liste.
    */
+  @Override
   public int taille() {
     return this.size;
   }
@@ -61,11 +59,14 @@ public class ListeTableau<T> implements Liste<T> {
    * @param i la position de l'élément
    * @return L'élément qui a été supprimé
    */
+  @Override
   public T enlever(int i) {
-    T tmp = this.tab[i];
-    this.tab.remove(i);
-    for (int y = 0; y < this.tab.size(); y++) {
-      this.tab[y] = this.tab[y + 1];
+    if (i < 0 || i >= this.size) {
+      throw new IndexOutOfBoundsException();
+    }
+    T tmp = this.tableau[i];
+    for (int j = i; j < this.size - 1; j++) {
+      tableau[j] = tableau[j + 1];
     }
     return tmp;
   }
@@ -76,8 +77,12 @@ public class ListeTableau<T> implements Liste<T> {
    * @param i
    * @return
    */
+  @Override
   public T element(int i) {
-    return this.tab[i];
+    if (i < 0 || i >= this.size) {
+      throw new IndexOutOfBoundsException();
+    }
+    return tableau[i];
   }
 
   /**
@@ -87,7 +92,13 @@ public class ListeTableau<T> implements Liste<T> {
    * @param e L'élément à comparer.
    * @return
    */
+  @Override
   public boolean contient(T e) {
-    return this.tab.contains(e);
+    for (int i = 0; i < this.size; i++) {
+      if (tableau[i].equals(e)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
