@@ -1,15 +1,31 @@
 package fr.rodez3il.a2022.mrmatt.solveur.structures;
 
-
 import java.util.Arrays;
 
 public class ListeChainee<T> implements Liste<T> {
 
-  private T[] tableau;
+  class Maillon {
+    private T donnee;
+    private Maillon suivant;
 
-  public ListeChainee(int size) throws Exception {
-    this.tableau = (T[]) new Object[];
-    // this.tab = new T[size];
+    public Maillon(T donnee) {
+      this.donnee = donnee;
+      this.suivant = null;
+    }
+
+    public T getDonnee() {
+      return this.donnee;
+    }
+
+    public void setSuivant(Maillon suivant) {
+      this.suivant = suivant;
+    }
+  }
+
+  private Maillon[] tableau;
+
+  public ListeChainee() {
+    this.tableau = (Maillon[]) new Object[0];
   }
 
   /**
@@ -17,16 +33,13 @@ public class ListeChainee<T> implements Liste<T> {
    * 
    * @param element l'élément à ajouter
    */
-
+  @Override
   public void ajouter(T element) {
-    /**
-     * Si on a atteint la taille maximale,
-     * refaire un tableau en doublant la taille initale
-     */
-    if (this.tableau.length == this.size) {
-      tableau = Arrays.copyOf(tableau, tableau.length * 2);
-    }
-    this.tableau[size++] = element;
+    this.tableau = Arrays.copyOf(this.tableau, this.tableau.length + 1);
+    int size = this.tableau.length;
+    
+    this.tableau[size] = new Maillon(element);
+    this.tableau[size - 1].setSuivant(this.tableau[size]);
   }
 
   /**
@@ -57,7 +70,13 @@ public class ListeChainee<T> implements Liste<T> {
    */
   @Override
   public T enlever(int i) {
-    //ToDo
+    Maillon temp = this.tableau[i];
+    for(int y=i; y<this.tableau.length-1; y++){
+      this.tableau[y] = this.tableau[y+1];
+    }
+    this.tableau[i-1].setSuivant(this.tableau[i]);
+    this.tableau = Arrays.copyOf(this.tableau, this.tableau.length - 1);
+    return temp;
   }
 
   /**
@@ -68,7 +87,10 @@ public class ListeChainee<T> implements Liste<T> {
    */
   @Override
   public T element(int i) {
-    //ToDo
+    if (i < 0 || i >= this.size) {
+      throw new IndexOutOfBoundsException();
+    }
+    return tableau[i];
   }
 
   /**
@@ -80,6 +102,11 @@ public class ListeChainee<T> implements Liste<T> {
    */
   @Override
   public boolean contient(T e) {
-    //ToDo
+    for (int i = 0; i < this.size; i++) {
+      if (tableau[i].equals(e)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

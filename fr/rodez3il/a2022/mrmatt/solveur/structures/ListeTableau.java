@@ -21,14 +21,14 @@ public class ListeTableau<T> implements Liste<T> {
    * 
    * @param element l'élément à ajouter
    */
-  
+
   public void ajouter(T element) {
     /**
      * Si on a atteint la taille maximale,
      * refaire un tableau en doublant la taille initale
      */
     if (this.tableau.length == this.size) {
-      tableau = Arrays.copyOf(tableau, tableau.length * 2);
+      this.tableau = Arrays.copyOf(tableau, tableau.length * 2);
     }
     this.tableau[size++] = element;
   }
