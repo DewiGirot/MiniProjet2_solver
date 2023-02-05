@@ -23,9 +23,10 @@ public class ListeChainee<T> implements Liste<T> {
   }
 
   private Maillon[] tableau;
+  private int size = 0;
 
   public ListeChainee() {
-    this.tableau = (Maillon[]) new Object[0];
+    this.tableau = (Maillon[]) new Object[this.size];
   }
 
   /**
@@ -35,11 +36,13 @@ public class ListeChainee<T> implements Liste<T> {
    */
   @Override
   public void ajouter(T element) {
-    this.tableau = Arrays.copyOf(this.tableau, this.tableau.length + 1);
-    int size = this.tableau.length;
-    
-    this.tableau[size] = new Maillon(element);
-    this.tableau[size - 1].setSuivant(this.tableau[size]);
+    if (this.tableau.length == this.size) {
+      this.size++;
+      this.tableau = Arrays.copyOf(this.tableau, this.size);
+    }
+
+    this.tableau[this.size] = new Maillon(element);
+    this.tableau[this.size - 1].setSuivant(this.tableau[this.size]);
   }
 
   /**
@@ -71,12 +74,12 @@ public class ListeChainee<T> implements Liste<T> {
   @Override
   public T enlever(int i) {
     Maillon temp = this.tableau[i];
-    for(int y=i; y<this.tableau.length-1; y++){
-      this.tableau[y] = this.tableau[y+1];
+    for (int y = i; y < this.tableau.length - 1; y++) {
+      this.tableau[y] = this.tableau[y + 1];
     }
-    this.tableau[i-1].setSuivant(this.tableau[i]);
+    this.tableau[i - 1].setSuivant(this.tableau[i]);
     this.tableau = Arrays.copyOf(this.tableau, this.tableau.length - 1);
-    return temp;
+    return temp.getDonnee();
   }
 
   /**
@@ -90,7 +93,7 @@ public class ListeChainee<T> implements Liste<T> {
     if (i < 0 || i >= this.size) {
       throw new IndexOutOfBoundsException();
     }
-    return tableau[i];
+    return tableau[i].getDonnee();
   }
 
   /**
