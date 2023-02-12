@@ -22,11 +22,12 @@ public class Noeud {
     return this.fils;
   }
 
-  // ToDo
-  public String visiter() {
-    return this.etatNiveau.toString();
+  // To check
+  public Boolean visiter() {
+    return this.commandes.estVide();
   }
 
+  // ToDo
   public void calculerFils() {
     if (visiter() != null) {
       configuration.inserer(this.fils.length, etatNiveau.toString());
