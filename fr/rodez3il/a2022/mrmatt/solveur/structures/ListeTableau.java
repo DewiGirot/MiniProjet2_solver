@@ -74,8 +74,8 @@ public class ListeTableau<T> implements Liste<T> {
   /**
    * Renvoie l'élément à la position i.
    * 
-   * @param i
-   * @return
+   * @param i représente la position i dans le tableau
+   * @return l'élément du tableau à la position i
    */
   @Override
   public T element(int i) {
@@ -90,7 +90,7 @@ public class ListeTableau<T> implements Liste<T> {
    * tel que f.equals(e) est VRAI.
    * 
    * @param e L'élément à comparer.
-   * @return
+   * @return vrai si l'élément e est présent dans le tableau, sinon retourne faux
    */
   @Override
   public boolean contient(T e) {

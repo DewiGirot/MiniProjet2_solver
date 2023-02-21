@@ -9,33 +9,52 @@ public class Noeud {
   private DictionnaireChaine<Integer, String> configuration;
   private Niveau etatNiveau;
   private Noeud[] fils;
-  private ListeChainee<String> commandes;
+  private String commandes;
+  private boolean visiter;
 
   public Noeud(DictionnaireChaine<Integer, String> configuration, Niveau etatNiveau, ListeChainee<String> commandes) {
     this.configuration = configuration;
     this.etatNiveau = etatNiveau;
     this.fils = new Noeud[4];
-    this.commandes = commandes;
+    this.visiter = false;
   }
 
+  /*
+   * 
+   * @return this.fils retourne la liste des noeuds fils du noeud actuel
+   */
   public Noeud[] getFils() {
     return this.fils;
   }
 
+  /*
+   *
+   * @return this.visiter retourne le noeud a déjà été visité
+   */
   public Boolean visiter() {
-    return this.commandes.estVide();
+    return this.visiter;
   }
 
   // ToDo
   public void calculerFils() {
     if (visiter() != null) {
       configuration.inserer(this.fils.length, etatNiveau.toString());
+      Commande[] commandesNoeud = Commande.values();
       for (int i = 0; i < 4; i++) {
-        
+        // tester chaque noeud, si on peut bouger dans la direction de celui-ci (haut,
+        // bas, g, d)
+        // ou si la partie est terminée , il n'y a pas de fils pour cette direction
+        // Mettre le visiter en true
+
+        //
       }
     }
   }
 
+  /*
+  * @param obj object à comparer
+  * @return retourne si l'object comparé est égale à celui du comparant
+  */
   @Override
   public boolean equals(Object obj) {
     if (obj == null) {
@@ -48,6 +67,9 @@ public class Noeud {
     return this.etatNiveau.toString().equals(other.etatNiveau.toString());
   }
 
+  /*
+  * @return retourne le hash d'un noeud
+  */
   @Override
   public int hashCode() {
     return this.configuration.hashCode()

@@ -22,6 +22,9 @@ public class ListeChainee<T> implements Liste<T> {
     }
   }
 
+  /*
+  * 
+  */
   private Maillon[] tableau;
   private int size = 0;
 
@@ -85,8 +88,8 @@ public class ListeChainee<T> implements Liste<T> {
   /**
    * Renvoie l'élément à la position i.
    * 
-   * @param i
-   * @return
+   * @param i représentant la position i dans le tableau
+   * @return l'élément à la position i du tableau
    */
   @Override
   public T element(int i) {
@@ -101,7 +104,7 @@ public class ListeChainee<T> implements Liste<T> {
    * tel que f.equals(e) est VRAI.
    * 
    * @param e L'élément à comparer.
-   * @return
+   * @return vrai si l'élément e est contenu dans le tableau, sinon retourne faux
    */
   @Override
   public boolean contient(T e) {
