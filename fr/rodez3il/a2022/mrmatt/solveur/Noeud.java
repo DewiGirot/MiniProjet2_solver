@@ -8,21 +8,20 @@ public class Noeud {
 
   private DictionnaireChaine<Integer, String> configuration;
   private Niveau etatNiveau;
-  private String[] fils;
+  private Noeud[] fils;
   private ListeChainee<String> commandes;
 
   public Noeud(DictionnaireChaine<Integer, String> configuration, Niveau etatNiveau, ListeChainee<String> commandes) {
     this.configuration = configuration;
     this.etatNiveau = etatNiveau;
-    this.fils = new String[4];
+    this.fils = new Noeud[4];
     this.commandes = commandes;
   }
 
-  public String[] getFils() {
+  public Noeud[] getFils() {
     return this.fils;
   }
 
-  // To check
   public Boolean visiter() {
     return this.commandes.estVide();
   }
@@ -32,7 +31,7 @@ public class Noeud {
     if (visiter() != null) {
       configuration.inserer(this.fils.length, etatNiveau.toString());
       for (int i = 0; i < 4; i++) {
-        // ToDo
+        
       }
     }
   }
