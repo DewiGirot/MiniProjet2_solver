@@ -41,12 +41,16 @@ public class Noeud {
       configuration.inserer(this.fils.length, etatNiveau.toString());
       Commande[] commandesNoeud = Commande.values();
       for (int i = 0; i < 4; i++) {
-        // tester chaque noeud, si on peut bouger dans la direction de celui-ci (haut,
-        // bas, g, d)
-        // ou si la partie est terminée , il n'y a pas de fils pour cette direction
-        // Mettre le visiter en true
-
-        //
+        Niveau nouvelEtat = this.etatNiveau;
+        Commande c = lireCommande(i*2);
+        if(etatNiveau.jouer(c) == true){
+          String nouvelleChaine = this.commande + nouvelEtat;
+          Integer hash = nouvelEtat.hashCode();
+          String valeurChaine = configuration.get(hash);
+          if(nouvelEtat.estGagne()){
+            System.out.println("Solution trouvée : " + nouvelleChaine);
+          }
+        }
       }
     }
   }

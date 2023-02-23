@@ -11,4 +11,6 @@ Réponse : Les différences majeunes viennent premierement des types que l'on ut
 
 ## 
 ### Question 3: Dans votre code, le type statique de vos références de liste et dictionnaires est-il celui de vos implémentations concrètes ? Pourquoi ?
-Réponse : 
+Réponse : Les types statiques des références de liste et de dictionnaires sont bien ceux des implémentations concrètes, comme par exemple ArrayList<Noeud> ou DictionnaireChainee<Integer, String>.
+</br></br>
+Cela permet une plus grande flexibilité dans le code, car il est possible de changer l'implémentation concrète utilisée sans avoir à changer le code qui interagit avec la liste ou le dictionnaire.
