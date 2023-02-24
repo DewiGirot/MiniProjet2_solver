@@ -38,27 +38,28 @@ public class Noeud {
   // ToDo
   public void calculerFils() {
     if (visiter() != null) {
-      configuration.inserer(this.fils.length, etatNiveau.toString());
-      Commande[] commandesNoeud = Commande.values();
-      for (int i = 0; i < 4; i++) {
-        Niveau nouvelEtat = this.etatNiveau;
-        Commande c = lireCommande(i*2);
-        if(etatNiveau.jouer(c) == true){
-          String nouvelleChaine = this.commande + nouvelEtat;
-          Integer hash = nouvelEtat.hashCode();
-          String valeurChaine = configuration.get(hash);
-          if(nouvelEtat.estGagne()){
-            System.out.println("Solution trouvée : " + nouvelleChaine);
-          }
-        }
-      }
+      // configuration.inserer(this.fils.length, etatNiveau.toString());
+      // Commande[] commandesNoeud = Commande.values();
+      // for (int i = 0; i < 4; i++) {
+      // Niveau nouvelEtat = this.etatNiveau;
+      // Commande c = lireCommande(i*2);
+      // if(etatNiveau.jouer(c) == true){
+      // String nouvelleChaine = this.commande + nouvelEtat;
+      // Integer hash = nouvelEtat.hashCode();
+      // String valeurChaine = configuration.get(hash);
+      // if(nouvelEtat.estGagne()){
+      // System.out.println("Solution trouvée : " + nouvelleChaine);
+      // }
+      // }
+      // }
     }
   }
 
   /*
-  * @param obj object à comparer
-  * @return retourne si l'object comparé est égale à celui du comparant
-  */
+   * @param obj object à comparer
+   * 
+   * @return retourne si l'object comparé est égale à celui du comparant
+   */
   @Override
   public boolean equals(Object obj) {
     if (obj == null) {
@@ -72,8 +73,8 @@ public class Noeud {
   }
 
   /*
-  * @return retourne le hash d'un noeud
-  */
+   * @return retourne le hash d'un noeud
+   */
   @Override
   public int hashCode() {
     return this.configuration.hashCode()
